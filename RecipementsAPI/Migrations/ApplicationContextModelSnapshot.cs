@@ -32,13 +32,11 @@ namespace RecipementAPI.Migrations
                     b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quanity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quanity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecipementId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

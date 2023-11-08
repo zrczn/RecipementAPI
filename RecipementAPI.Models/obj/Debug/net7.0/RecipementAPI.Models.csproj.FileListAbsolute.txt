@@ -1,0 +1,11 @@
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\bin\Debug\net7.0\RecipementAPI.Models.deps.json
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\bin\Debug\net7.0\RecipementAPI.Models.dll
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\bin\Debug\net7.0\RecipementAPI.Models.pdb
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.AssemblyInfoInputs.cache
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.AssemblyInfo.cs
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.csproj.CoreCompileInputs.cache
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.dll
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\refint\RecipementAPI.Models.dll
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\RecipementAPI.Models.pdb
+C:\Users\Patryk\source\repos\RecipementAPI\RecipementAPI.Models\obj\Debug\net7.0\ref\RecipementAPI.Models.dll

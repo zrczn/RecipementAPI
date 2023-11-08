@@ -1,0 +1,4 @@
+﻿
+data annotations
+
+przy usuwaniu przepisu usuwaj powiązane składniki
