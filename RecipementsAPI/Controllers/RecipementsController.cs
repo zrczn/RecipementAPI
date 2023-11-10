@@ -38,7 +38,7 @@ namespace RecipementsAPI.Controllers
             return Ok(headers);
         }
 
-        [HttpGet("reicpe/{id}")]
+        [HttpGet("recipe/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<RecipeDTO>> GetSingleRecipe(int id)
@@ -71,6 +71,7 @@ namespace RecipementsAPI.Controllers
         [HttpPost("recipe")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> CreateRecipe([FromBody] RecipeDTO DtoObj)
         {
             var getExistingRecipe = await _dbCon.Recipes.FirstOrDefaultAsync(x => x.Name.ToLower() == DtoObj.Title.ToLower());
@@ -149,7 +150,7 @@ namespace RecipementsAPI.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> UpdateRecipe(int id, [FromBody] RecipeDTO DtoObj)
         {
-            var getRecipe = await _dbCon.Recipes.FirstOrDefaultAsync(x => x.Id == id);
+            var getRecipe = await _dbCon.Recipes.Include(x => x.Enrollments).ThenInclude(y => y.Ingredient).FirstOrDefaultAsync(x => x.Id == id);
 
             if (getRecipe == null)
             {
@@ -162,25 +163,41 @@ namespace RecipementsAPI.Controllers
 
             foreach (var ingredient in DtoObj.Ingredients)
             {
-                var getIngredient = await _dbCon.Ingredients.FirstOrDefaultAsync(x => x.Id == ingredient.Id);
+                bool flag = false;
 
-                if(getIngredient != null)
+                foreach (var enrollment in getRecipe.Enrollments)
                 {
-                    getIngredient.Name = ingredient.Title;
-                }
-                else
-                {
-                    var newIngredient = new Ingredient() { Name = ingredient.Title };
+                    var getDbIngredient = enrollment.Ingredient;
 
-                    _dbCon.Add<Ingredient>(newIngredient);
+                    if(ingredient.Title.ToLower() == getDbIngredient.Name.ToLower())
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        Ingredient newIngredient = new();
+                        newIngredient.Name = ingredient.Title;
 
-                    var newEnrollment = new Enrollment() { RecipeId = id, IngredientId = newIngredient.Id, Quanity = ingredient.Quanity };
+
+                        await _dbCon.AddAsync(newIngredient);
+                        await _dbCon.SaveChangesAsync();
+
+                        Ingredient newIngredientId = await _dbCon.Ingredients.FirstOrDefaultAsync(x => x.Id == newIngredient.Id);
+
+                        await _dbCon.Enrollments.AddAsync(new Enrollment() { RecipeId = enrollment.RecipeId, IngredientId = newIngredientId.Id, Quanity = ingredient.Quanity});
+                    }
+
+                    if (flag)
+                    {
+                        enrollment.Quanity = ingredient.Quanity;
+                        flag = false;
+                    }
 
                     await _dbCon.SaveChangesAsync();
                 }
+
             }
 
-            await _dbCon.SaveChangesAsync();
             return Ok();
         }
     }

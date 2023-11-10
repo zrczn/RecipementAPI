@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeApp.ClientConfiguration
+namespace APIClient.Views
 {
-    public interface IClient
+    internal interface ICombinedView : IView
     {
-        HttpClient HttpClient { get; }
+
     }
 }

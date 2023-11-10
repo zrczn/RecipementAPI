@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeApp.ClientConfiguration
+namespace APIClient.Services.Client
 {
-    public class Client : IClient
+    internal class Client : IClient
     {
         public HttpClient HttpClient { get; }
 
@@ -14,7 +14,7 @@ namespace RecipeApp.ClientConfiguration
         {
             HttpClient cli = new HttpClient();
 
-            cli.BaseAddress = new Uri("https://localhost:7174/");
+            cli.BaseAddress = new Uri("https://localhost:7073/");
             cli.DefaultRequestHeaders.Accept.Clear();
             cli.DefaultRequestHeaders.Accept.Add(
                 new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
